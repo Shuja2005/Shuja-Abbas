@@ -1,0 +1,120 @@
+{
+  "sections": {
+    "lifestyle_grid_demo": {
+      "type": "lifestyle-grid",
+      "settings": {
+        "title": "Tisso vison in the wild",
+        "title_alignment": "left",
+        "title_font_size": 32,
+        "title_font_size_mobile": 24,
+        "title_font_weight": "400",
+        "title_color": "#000000",
+        "background_color": "#ffffff",
+        "image_border_radius": 0
+      },
+      "blocks": {
+        "item_1": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/tailored-jacket",
+            "custom_title": "Tailored Jacket",
+            "custom_description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
+            "custom_image": "",
+            "color_combination": "blue_black",
+            "default_color": "first",
+            "hotspot_position_x": 50,
+            "hotspot_position_y": 60
+          }
+        },
+        "item_2": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/sample-product-2",
+            "custom_title": "Silver Watch",
+            "custom_description": "Elegant silver watch with classic design. Perfect for formal occasions and everyday wear.",
+            "custom_image": "",
+            "color_combination": "white_black",
+            "default_color": "first",
+            "hotspot_position_x": 25,
+            "hotspot_position_y": 50
+          }
+        },
+        "item_3": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/sample-product-3",
+            "custom_title": "Accordion Pleated Dress",
+            "custom_description": "Classic red and black buffalo plaid shirt. Comfortable and stylish for casual outings.",
+            "custom_image": "",
+            "color_combination": "red_grey",
+            "default_color": "first",
+            "hotspot_position_x": 30,
+            "hotspot_position_y": 40
+          }
+        },
+        "item_4": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/sample-product-4",
+            "custom_title": "Green Trench Coat",
+            "custom_description": "Stylish black leather moto jacket with classic design. Perfect for adding edge to any outfit.",
+            "custom_image": "",
+            "color_combination": "white_black",
+            "default_color": "first",
+            "hotspot_position_x": 70,
+            "hotspot_position_y": 30
+          }
+        },
+        "item_5": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/sample-product-5",
+            "custom_title": "Tennis Blue T-Shirt",
+            "custom_description": "Classic grey and navy varsity jacket with red 'B' patch. Retro style for modern fashion.",
+            "custom_image": "",
+            "color_combination": "grey_black",
+            "default_color": "first",
+            "hotspot_position_x": 75,
+            "hotspot_position_y": 25
+          }
+        },
+        "item_6": {
+          "type": "lifestyle_item",
+          "settings": {
+            "image": "",
+            "product": "",
+            "custom_link": "/products/sample-product-6",
+            "custom_title": "Long Sleeve Tennis Top",
+            "custom_description": "Cropped denim jacket with vintage appeal. Perfect for layering over any outfit.",
+            "custom_image": "",
+            "color_combination": "blue_black",
+            "default_color": "first",
+            "hotspot_position_x": 65,
+            "hotspot_position_y": 35
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6"
+      ]
+    }
+  },
+  "order": [
+    "lifestyle_grid_demo"
+  ]
+}
