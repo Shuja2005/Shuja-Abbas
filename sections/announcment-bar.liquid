@@ -1,0 +1,122 @@
+{%- style -%}
+  .announcement-bar {
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_vertical }}px 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .announcement-bar__text {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Hide mobile text by default, show desktop text */
+  .announcement-bar__text--mobile {
+    display: none;
+  }
+  .announcement-bar__text--desktop {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    .announcement-bar {
+      padding: {{ section.settings.padding_vertical_mobile }}px 0;
+    }
+    
+    .announcement-bar__text {
+      font-size: {{ section.settings.text_size_mobile }}px;
+    }
+
+    /* On mobile, hide desktop text and show mobile text */
+    .announcement-bar__text--desktop {
+      display: none;
+    }
+    .announcement-bar__text--mobile {
+      display: block;
+    }
+    
+    /* Keep same font size and family on mobile */
+    .announcement-bar__text {
+      font-size: 14px;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.settings.text != blank or section.settings.mobile_text != blank -%}
+  <div class="announcement-bar" id="announcement-bar-{{ section.id }}">
+    {%- if section.settings.text != blank -%}
+      <p class="announcement-bar__text announcement-bar__text--desktop">{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- if section.settings.mobile_text != blank -%}
+      <p class="announcement-bar__text announcement-bar__text--mobile">{{ section.settings.mobile_text }}</p>
+    {%- else -%}
+      {# If no mobile-specific text, use desktop text on mobile as well #}
+      <p class="announcement-bar__text announcement-bar__text--mobile">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text (Desktop)",
+      "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL"
+    },
+    {
+      "type": "text",
+      "id": "mobile_text",
+      "label": "Announcement Text (Mobile)",
+      "info": "Leave blank to use desktop text on mobile devices"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical Padding (Desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical_mobile",
+      "min": 6,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical Padding (Mobile)",
+      "default": 10
+    },
+
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

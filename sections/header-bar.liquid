@@ -1,0 +1,436 @@
+{% liquid
+    assign bg          = section.settings.bg | default: '#f5f5f5'
+    assign text        = section.settings.text_color | default: '#111111'
+    assign btn_bg      = section.settings.btn_bg | default: '#ffeb3b'
+    assign btn_text    = section.settings.btn_text | default: '#111111'
+    assign btn_bg_h    = section.settings.btn_bg_hover | default: '#ffe100'
+    assign btn_text_h  = section.settings.btn_text_hover | default: '#111111'
+    assign pad_y       = section.settings.padding_y | default: 14
+    assign max_w       = section.settings.max_width | default: 1280
+  %}
+  
+  <section
+    class="cta-header"
+    aria-label="{{ section.settings.accessible_label | escape }}"
+  >
+    <!-- Fixed Header Bar -->
+    <div class="cta-header__fixed-bar">
+      <div class="cta-header__inner">
+        <!-- Mobile Toggle Button (hidden on desktop) -->
+        <button class="cta-header__toggle-btn cta-header__toggle-btn--mobile" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="cta-header__hamburger" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="cta-header__close" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+            <path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <!-- Brand/Logo -->
+        {% if section.settings.left_heading != blank %}
+          <h3 class="cta-header__brand">{{ section.settings.left_heading }}</h3>
+        {% endif %}
+        
+        <!-- Desktop Message (hidden on mobile) -->
+        {% if section.settings.center_text != blank %}
+          <p class="cta-header__message cta-header__message--desktop">{{ section.settings.center_text }}</p>
+        {% endif %}
+        
+        <!-- Desktop Button (hidden on mobile) -->
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a
+            class="cta-header__btn cta-header__btn--desktop"
+            href="{{ section.settings.button_link }}"
+            {% if section.settings.button_new_tab %}target="_blank" rel="noopener"{% endif %}
+            aria-label="{{ section.settings.button_label | escape }}"
+          >
+            <span class="cta-header__btn-text">{{ section.settings.button_label }}</span>
+            <!-- inline arrow icon -->
+            <svg class="cta-header__arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <path d="M5 12h12m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+        
+        <div class="cta-header__spacer"></div>
+      </div>
+    </div>
+  
+    <!-- Expandable Content Area (Mobile Only) -->
+    <div class="cta-header__content">
+      <div class="cta-header__content-inner">
+        <!-- Mobile Text (hidden on desktop) -->
+        {% if section.settings.mobile_text != blank %}
+          <p class="cta-header__message cta-header__message--mobile">{{ section.settings.mobile_text }}</p>
+        {% endif %}
+  
+        <!-- Mobile Button (hidden on desktop) -->
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a
+            class="cta-header__btn cta-header__btn--mobile"
+            href="{{ section.settings.button_link }}"
+            {% if section.settings.button_new_tab %}target="_blank" rel="noopener"{% endif %}
+            aria-label="{{ section.settings.button_label | escape }}"
+          >
+            <span class="cta-header__btn-text">{{ section.settings.button_label }}</span>
+            <!-- inline arrow icon -->
+            <svg class="cta-header__arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+              <path d="M5 12h12m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  
+  <style>
+    /* ===== Scoped styles (only affect this section) ===== */
+    #shopify-section-{{ section.id }} {
+      --cta-bg: {{ bg }};
+      --cta-text: {{ text }};
+      --cta-pad-y: {{ pad_y | times: 1.0 }}px;
+      --cta-max-w: {{ max_w | times: 1.0 }}px;
+      --cta-btn-bg: {{ btn_bg }};
+      --cta-btn-text: {{ btn_text }};
+      --cta-btn-bg-h: {{ btn_bg_h }};
+      --cta-btn-text-h: {{ btn_text_h }};
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      border-bottom: 1px solid #e0e0e0;
+    }
+  
+    /* Fixed Header Bar */
+    #shopify-section-{{ section.id }} .cta-header__fixed-bar {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__inner {
+      max-width: var(--cta-max-w);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  
+    /* Toggle Button - Mobile Only */
+    #shopify-section-{{ section.id }} .cta-header__toggle-btn {
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      color: #111111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__toggle-btn:hover {
+      background-color: #f5f5f5;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__toggle-btn[aria-expanded="true"] .cta-header__hamburger {
+      display: none;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__toggle-btn[aria-expanded="false"] .cta-header__close {
+      display: none;
+    }
+  
+    /* Brand/Logo */
+    #shopify-section-{{ section.id }} .cta-header__brand {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #111111;
+      flex-grow: 1;
+      text-align: center;
+    }
+  
+    /* Desktop Message in Header */
+    #shopify-section-{{ section.id }} .cta-header__message--desktop {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.4;
+      color: #111111;
+      flex-grow: 1;
+      text-align: center;
+    }
+  
+    /* Desktop Button in Header */
+    #shopify-section-{{ section.id }} .cta-header__btn--desktop {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--cta-btn-bg);
+      color: var(--cta-btn-text);
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      white-space: nowrap;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--desktop::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #111111;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--desktop:hover::before {
+      left: 0;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--desktop:hover {
+      color: white;
+      transform: translateY(-1px);
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__spacer {
+      width: 40px; /* Same width as toggle button for balance */
+    }
+  
+    /* Expandable Content Area (Mobile Only) */
+    #shopify-section-{{ section.id }} .cta-header__content {
+      background: #f5f5f5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__content.expanded {
+      max-height: 200px; /* Adjust based on content */
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__content-inner {
+      max-width: var(--cta-max-w);
+      margin: 0 auto;
+      padding: 20px 16px;
+      text-align: center;
+    }
+  
+    /* Mobile Message */
+    #shopify-section-{{ section.id }} .cta-header__message--mobile {
+      margin: 0 0 20px 0;
+      font-size: 16px;
+      line-height: 1.4;
+      color: #111111;
+    }
+  
+    /* Mobile Button */
+    #shopify-section-{{ section.id }} .cta-header__btn--mobile {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--cta-btn-bg);
+      color: var(--cta-btn-text);
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 14px;
+      padding: 14px 24px;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--mobile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #111111;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--mobile:hover::before {
+      left: 0;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn--mobile:hover {
+      color: white;
+      transform: translateY(-1px);
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn-text {
+      position: relative;
+      z-index: 2;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__arrow {
+      transition: transform 0.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+  
+    #shopify-section-{{ section.id }} .cta-header__btn:hover .cta-header__arrow {
+      transform: translateX(4px);
+    }
+  
+    /* Desktop Layout */
+    @media (min-width: 769px) {
+      #shopify-section-{{ section.id }} .cta-header__brand {
+        font-size: 20px;
+        flex-grow: 0;
+        margin-right: 20px;
+      }
+      
+      #shopify-section-{{ section.id }} .cta-header__inner {
+        padding: 16px 24px;
+      }
+      
+      #shopify-section-{{ section.id }} .cta-header__message--desktop {
+        font-size: 18px;
+      }
+  
+      #shopify-section-{{ section.id }} .cta-header__btn--desktop {
+        font-size: 16px;
+        padding: 14px 24px;
+      }
+  
+      /* Hide mobile elements on desktop */
+      #shopify-section-{{ section.id }} .cta-header__toggle-btn--mobile,
+      #shopify-section-{{ section.id }} .cta-header__message--mobile,
+      #shopify-section-{{ section.id }} .cta-header__btn--mobile {
+        display: none;
+      }
+  
+      #shopify-section-{{ section.id }} .cta-header__spacer {
+        display: none;
+      }
+    }
+  
+    /* Mobile Layout */
+    @media (max-width: 768px) {
+      #shopify-section-{{ section.id }} .cta-header__brand {
+        font-size: 16px;
+      }
+      
+      #shopify-section-{{ section.id }} .cta-header__inner {
+        padding: 10px 16px;
+      }
+      
+      #shopify-section-{{ section.id }} .cta-header__toggle-btn {
+        width: 36px;
+        height: 36px;
+      }
+      
+      #shopify-section-{{ section.id }} .cta-header__spacer {
+        width: 36px;
+      }
+  
+      /* Hide desktop elements on mobile */
+      #shopify-section-{{ section.id }} .cta-header__message--desktop,
+      #shopify-section-{{ section.id }} .cta-header__btn--desktop {
+        display: none;
+      }
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleBtn = document.querySelector('#shopify-section-{{ section.id }} .cta-header__toggle-btn');
+      const content = document.querySelector('#shopify-section-{{ section.id }} .cta-header__content');
+      const body = document.body;
+      
+      if (toggleBtn && content) {
+        // Set initial padding for mobile to account for fixed header
+        const headerHeight = document.querySelector('#shopify-section-{{ section.id }} .cta-header__fixed-bar').offsetHeight;
+        body.style.paddingTop = headerHeight + 'px';
+        body.style.transition = 'padding-top 0.3s ease';
+        
+        toggleBtn.addEventListener('click', function() {
+          const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+          
+          if (isExpanded) {
+            // Close the content
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            content.classList.remove('expanded');
+            
+            // Reset padding to just header height
+            body.style.paddingTop = headerHeight + 'px';
+          } else {
+            // Open the content
+            toggleBtn.setAttribute('aria-expanded', 'true');
+            content.classList.add('expanded');
+            
+            // Calculate the total height of the expanded header
+            const contentHeight = content.scrollHeight;
+            const totalHeight = headerHeight + contentHeight;
+            
+            // Add padding to body to push content down
+            body.style.paddingTop = totalHeight + 'px';
+          }
+        });
+      }
+    });
+  </script>
+  
+  {% schema %}
+  {
+    "name": "CTA Header Bar",
+    "settings": [
+      { "type": "text", "id": "left_heading", "label": "Brand/Logo text", "default": "TISSO VISON" },
+      { "type": "text", "id": "center_text", "label": "Desktop message text", "default": "Find the ideal gift for your loved ones" },
+      { "type": "text", "id": "mobile_text", "label": "Mobile message text", "default": "Find the ideal gift for your loved ones" },
+  
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "CHOOSE GIFT" },
+      { "type": "url",  "id": "button_link",  "label": "Button link" },
+      { "type": "checkbox", "id": "button_new_tab", "label": "Open button in new tab", "default": false },
+  
+      { "type": "color", "id": "bg", "label": "Content background", "default": "#f5f5f5" },
+      { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+  
+      { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#ffe44d" },
+      { "type": "color", "id": "btn_text", "label": "Button text color", "default": "#111111" },
+      { "type": "color", "id": "btn_bg_hover", "label": "Button background (hover)", "default": "#ffd900" },
+      { "type": "color", "id": "btn_text_hover", "label": "Button text (hover)", "default": "#111111" },
+  
+      { "type": "range", "id": "padding_y", "min": 6, "max": 32, "step": 1, "unit": "px", "label": "Vertical padding", "default": 14 },
+      { "type": "range", "id": "max_width", "min": 960, "max": 1600, "step": 10, "unit": "px", "label": "Content max width", "default": 1280 },
+  
+      { "type": "text", "id": "accessible_label", "label": "Accessible label", "default": "Promotional header bar" }
+    ],
+    "presets": [
+      { "name": "CTA Header Bar" }
+    ]
+  }
+  {% endschema %}
+  
+  
